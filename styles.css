@@ -1,15 +1,15 @@
 :root {
-  --color-primary: #176b4d;
-  --color-primary-dark: #0f4f39;
-  --color-primary-soft: #e8f5ef;
-  --color-accent: #f2b84b;
-  --color-text: #17211b;
-  --color-muted: #52615a;
-  --color-surface: #ffffff;
-  --color-background: #f5f8f6;
-  --color-border: #cbd8d1;
+  --color-primary: #550b14;        /* Maroon Utama (#550b14) */
+  --color-primary-dark: #330006;   /* Maroon Sangat Gelap */
+  --color-primary-soft: #f4e8ea;   /* Rose Water Lembut untuk Badge/Step */
+  --color-accent: #f2b84b;         /* Aksen Kuning Emas */
+  --color-text: #1c010c;           /* Teks Utama Terdalam */
+  --color-muted: #52615a;          /* Teks Muted/Sekunder */
+  --color-surface: #ffffff;        /* WARNA KOTAK/POPUP DIUBAH MENJADI PUTIH BERSIH (#ffffff) */
+  --color-background: #550b14;     /* WARNA LATAR BELAKANG DIUBAH MENJADI MAROON (#550b14) */
+  --color-border: #e2d2d4;         /* Warna Garis Tepi Lembut */
   --color-danger: #a52a2a;
-  --shadow-card: 0 0.5rem 1.5rem rgb(23 33 27 / 10%);
+  --shadow-card: 0 0.5rem 1.5rem rgb(0 0 0 / 25%);
   --radius-small: 0.5rem;
   --radius-medium: 0.9rem;
   --radius-large: 1.4rem;
@@ -52,20 +52,23 @@ h1 {
   max-width: 18ch;
   margin-block-end: 1rem;
   font-size: clamp(2rem, 7vw, 3.75rem);
+  color: var(--color-primary-dark);
 }
 
 h2 {
   margin-block-end: 1rem;
   font-size: clamp(1.5rem, 4vw, 2.25rem);
+  color: var(--color-primary-dark);
 }
 
 h3 {
   margin-block-end: 0.6rem;
   font-size: 1.2rem;
+  color: var(--color-primary-dark);
 }
 
 a {
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
   text-underline-offset: 0.2em;
 }
 
@@ -113,7 +116,7 @@ a:hover {
 
 .brand {
   margin: 0;
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
   font-size: 1.4rem;
   font-weight: 700;
 }
@@ -139,8 +142,17 @@ a:hover {
 }
 
 .hero {
-  padding-block: clamp(3rem, 10vw, 7rem);
-  background: linear-gradient(135deg, rgb(232 245 239 / 95%), rgb(255 255 255 / 92%));
+  padding-block: clamp(4rem, 12vw, 8rem);
+  background: 
+    linear-gradient(180deg, rgba(28, 1, 12, 0.5) 0%, rgba(28, 1, 12, 0.7) 100%),
+    url(roti.jpg) center/cover no-repeat;
+  color: #ffffff;
+}
+
+.hero h1,
+.hero .eyebrow,
+.hero .lead {
+  color: #ffffff;
 }
 
 .hero-layout {
@@ -151,7 +163,7 @@ a:hover {
 
 .eyebrow {
   margin-block-end: 0.5rem;
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -168,7 +180,8 @@ a:hover {
   border: 0.0625rem solid var(--color-border);
   border-radius: var(--radius-large);
   background: var(--color-surface);
-  box-shadow: var(--shadow-card);
+  color: var(--color-text);
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.25);
 }
 
 .hero-panel strong {
@@ -191,7 +204,7 @@ a:hover {
   border: 0.125rem solid var(--color-primary);
   border-radius: var(--radius-small);
   background: var(--color-primary);
-  color: var(--color-surface);
+  color: #ffffff;
   font: inherit;
   font-weight: 700;
   line-height: 1.2;
@@ -202,16 +215,18 @@ a:hover {
 .button:hover {
   background: var(--color-primary-dark);
   border-color: var(--color-primary-dark);
+  color: #ffffff;
 }
 
 .button-secondary {
   background: transparent;
-  color: var(--color-primary-dark);
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 .button-secondary:hover {
-  background: var(--color-primary-soft);
-  color: var(--color-primary-dark);
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 .section {
@@ -219,12 +234,12 @@ a:hover {
 }
 
 .section-alt {
-  background: var(--color-surface);
+  background: var(--color-background);
 }
 
 .section-intro {
   max-width: 65ch;
-  color: var(--color-muted);
+  color: #ffffff;
 }
 
 .steps-grid,
@@ -252,6 +267,7 @@ a:hover {
   border-radius: 50%;
   background: var(--color-primary-soft);
   color: var(--color-primary-dark);
+  font-weight: bold;
 }
 
 .offer-card {
@@ -301,11 +317,20 @@ a:hover {
   padding: 1rem;
   border-inline-start: 0.3rem solid var(--color-primary);
   border-radius: var(--radius-small);
-  background: var(--color-primary-soft);
+  background: var(--color-surface);
 }
 
 .page-heading {
   padding-block: clamp(2.5rem, 7vw, 5rem) 2rem;
+  color: #ffffff;
+}
+
+.page-heading h1 {
+  color: #ffffff;
+}
+
+.page-heading .lead {
+  color: #f4e8ea;
 }
 
 .form-card {
@@ -343,9 +368,9 @@ select,
 textarea {
   width: 100%;
   padding: 0.7rem 0.75rem;
-  border: 0.0625rem solid #809087;
+  border: 0.0625rem solid #b8a2a5;
   border-radius: var(--radius-small);
-  background: var(--color-surface);
+  background: #ffffff;
   color: var(--color-text);
   font: inherit;
 }
@@ -357,7 +382,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--color-primary-dark);
+  border-color: var(--color-primary);
 }
 
 input[type="checkbox"],
@@ -369,17 +394,17 @@ input[type="radio"] {
 }
 
 .required-note {
-  color: var(--color-muted);
+  color: #ffffff;
 }
 
 .site-footer {
   padding-block: 2rem;
   background: var(--color-primary-dark);
-  color: var(--color-surface);
+  color: #ffffff;
 }
 
 .site-footer a {
-  color: var(--color-surface);
+  color: #ffffff;
 }
 
 .footer-layout {
