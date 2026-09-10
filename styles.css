@@ -186,7 +186,7 @@ a:hover {
 
 .hero-panel strong {
   display: block;
-  color: var(--color-primary-dark);
+  color: #e53e3e; /* Mengubah warna tulisan 3 pihak menjadi merah */
   font-size: 2rem;
 }
 
