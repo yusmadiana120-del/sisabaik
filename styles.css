@@ -282,7 +282,7 @@ a:hover {
 
 .offer-card__visual {
   min-height: 8rem;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  background: linear-gradient(135deg, var(--color-primary), #7e6961);
 }
 
 .offer-card__content {
