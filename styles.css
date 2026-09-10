@@ -9,7 +9,7 @@
   --color-background: #550b14;     /* WARNA LATAR BELAKANG DIUBAH MENJADI MAROON (#550b14) */
   --color-border: #e2d2d4;         /* Warna Garis Tepi Lembut */
   --color-danger: #a52a2a;
-  --shadow-card: 0 0.5rem 1.5rem rgb(0 0 0 / 25%);
+  --shadow-card: 0 0.5rem 1.5rem #7e6961;
   --radius-small: 0.5rem;
   --radius-medium: 0.9rem;
   --radius-large: 1.4rem;
