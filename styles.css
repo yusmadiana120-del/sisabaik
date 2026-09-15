@@ -1,15 +1,15 @@
 :root {
-  --color-primary: #550b14;        /* Maroon Utama (#550b14) */
-  --color-primary-dark: #ffffff;   /* Maroon Sangat Gelap */
-  --color-primary-soft: #f4e8ea;   /* Rose Water Lembut untuk Badge/Step */
+  --color-primary: #550b14;        /* Maroon Utama */
+  --color-primary-dark: #330006;   /* Maroon Sangat Gelap */
+  --color-primary-soft: #f4e8ea;   /* Latar Lingkaran/Badge Solid */
   --color-accent: #f2b84b;         /* Aksen Kuning Emas */
   --color-text: #1c010c;           /* Teks Utama Terdalam */
   --color-muted: #52615a;          /* Teks Muted/Sekunder */
-  --color-surface: #ffffff;        /* WARNA KOTAK/POPUP DIUBAH MENJADI PUTIH BERSIH (#ffffff) */
-  --color-background: #550b14;     /* WARNA LATAR BELAKANG DIUBAH MENJADI MAROON (#550b14) */
-  --color-border: #e2d2d4;         /* Warna Garis Tepi Lembut */
+  --color-surface: #ffffff;        /* Kartu/Pop-up Putih Bersih */
+  --color-background: #550b14;     /* Latar Belakang Maroon */
+  --color-border: #e2d2d4;         /* Garis Tepi Lembut */
   --color-danger: #a52a2a;
-  --shadow-card: 0 0.5rem 1.5rem #7e6961;
+  --shadow-card: 0 0.5rem 1.5rem rgb(0 0 0 / 25%);
   --radius-small: 0.5rem;
   --radius-medium: 0.9rem;
   --radius-large: 1.4rem;
@@ -52,7 +52,7 @@ h1 {
   max-width: 18ch;
   margin-block-end: 1rem;
   font-size: clamp(2rem, 7vw, 3.75rem);
-  color: var(--color-primary-dark);
+  color: #ffffff;
 }
 
 h2 {
@@ -61,10 +61,20 @@ h2 {
   color: var(--color-primary-dark);
 }
 
+.section-alt h2,
+.section h2 {
+  color: #ffffff;
+}
+
+.card h2,
+.card h3,
+.offer-card h3 {
+  color: var(--color-primary-dark);
+}
+
 h3 {
   margin-block-end: 0.6rem;
   font-size: 1.2rem;
-  color: var(--color-primary-dark);
 }
 
 a {
@@ -141,16 +151,13 @@ a:hover {
   text-decoration-thickness: 0.2em;
 }
 
+/* Section Hero dengan Latar Gambar Roti & Overlay Gradasi */
 .hero {
   padding-block: clamp(4rem, 12vw, 8rem);
   background: 
-    linear-gradient(180deg, #000000 0%, #800000 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(85, 11, 20, 0.85) 100%),
     url('roti.jpg') center/cover no-repeat;
   color: #ffffff;
-}
-.offer-card__visual {
-  min-height: 8rem;
-  background: linear-gradient(135deg, #000000, #b30000);
 }
 
 .hero h1,
@@ -167,7 +174,6 @@ a:hover {
 
 .eyebrow {
   margin-block-end: 0.5rem;
-  color: var(--color-primary);
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -175,7 +181,6 @@ a:hover {
 
 .lead {
   max-width: 62ch;
-  color: var(--color-muted);
   font-size: 1.1rem;
 }
 
@@ -185,12 +190,12 @@ a:hover {
   border-radius: var(--radius-large);
   background: var(--color-surface);
   color: var(--color-text);
-  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.3);
 }
 
 .hero-panel strong {
   display: block;
-  color: #550b14; 
+  color: var(--color-primary);
   font-size: 2rem;
 }
 
@@ -259,9 +264,11 @@ a:hover {
   border: 0.0625rem solid var(--color-border);
   border-radius: var(--radius-medium);
   background: var(--color-surface);
+  color: var(--color-text);
   box-shadow: var(--shadow-card);
 }
 
+/* Lingkaran Angka Langkah (Solid, Tidak Terpengaruh Gradasi) */
 .step-number {
   display: inline-grid;
   width: 2.25rem;
@@ -269,8 +276,9 @@ a:hover {
   margin-block-end: 0.75rem;
   place-items: center;
   border-radius: 50%;
-  background: var(--color-primary-soft); 
-  color: var(--color-primary-dark);    
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-size: 1.1rem;
   font-weight: bold;
 }
 
@@ -281,7 +289,14 @@ a:hover {
   border: 0.0625rem solid var(--color-border);
   border-radius: var(--radius-medium);
   background: var(--color-surface);
+  color: var(--color-text);
   box-shadow: var(--shadow-card);
+}
+
+/* Visual Kartu Penawaran: Gradasi Murni Hitam & Merah */
+.offer-card__visual {
+  min-height: 8rem;
+  background: linear-gradient(135deg, #000000 0%, #800000 100%);
 }
 
 .offer-card__content {
@@ -307,7 +322,7 @@ a:hover {
   padding: 0.25rem 0.6rem;
   border-radius: 999px;
   background: var(--color-primary-soft);
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
   font-size: 0.85rem;
   font-weight: 700;
 }
@@ -317,6 +332,7 @@ a:hover {
   border-inline-start: 0.3rem solid var(--color-primary);
   border-radius: var(--radius-small);
   background: var(--color-surface);
+  color: var(--color-text);
 }
 
 .page-heading {
@@ -339,6 +355,7 @@ a:hover {
   border: 0.0625rem solid var(--color-border);
   border-radius: var(--radius-large);
   background: var(--color-surface);
+  color: var(--color-text);
   box-shadow: var(--shadow-card);
 }
 
@@ -351,7 +368,7 @@ a:hover {
 
 .form-section legend {
   padding-inline: 0.4rem;
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
   font-size: 1.1rem;
   font-weight: 700;
 }
