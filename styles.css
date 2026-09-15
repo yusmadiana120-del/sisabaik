@@ -3,13 +3,13 @@
   --color-primary-dark: #330006;   /* Maroon Sangat Gelap */
   --color-primary-soft: #f4e8ea;   /* Latar Lingkaran/Badge Solid */
   --color-accent: #f2b84b;         /* Aksen Kuning Emas */
-  --color-text: #1c010c;           /* Teks Utama Terdalam */
-  --color-muted: #52615a;          /* Teks Muted/Sekunder */
-  --color-surface: #ffffff;        /* Kartu/Pop-up Putih Bersih */
+  --color-text: #ffffff;           /* Warna Teks Utama (PUTIH BERSIH) */
+  --color-muted: #e2d2d4;          /* Teks Sekunder/Petunjuk */
+  --color-surface: #ffffff;        /* Kartu/Pop-up Putih */
   --color-background: #550b14;     /* Latar Belakang Maroon */
-  --color-border: #e2d2d4;         /* Garis Tepi Lembut */
-  --color-danger: #a52a2a;
-  --shadow-card: 0 0.5rem 1.5rem rgb(0 0 0 / 25%);
+  --color-border: #800000;         /* Garis Tepi Merah Tua */
+  --color-danger: #ff4d4d;
+  --shadow-card: 0 0.5rem 1.5rem rgb(0 0 0 / 40%);
   --radius-small: 0.5rem;
   --radius-medium: 0.9rem;
   --radius-large: 1.4rem;
@@ -58,27 +58,22 @@ h1 {
 h2 {
   margin-block-end: 1rem;
   font-size: clamp(1.5rem, 4vw, 2.25rem);
-  color: var(--color-primary-dark);
-}
-
-.section-alt h2,
-.section h2 {
   color: #ffffff;
-}
-
-.card h2,
-.card h3,
-.offer-card h3 {
-  color: var(--color-primary-dark);
 }
 
 h3 {
   margin-block-end: 0.6rem;
   font-size: 1.2rem;
+  color: #ffffff;
+}
+
+.card h3,
+.offer-card h3 {
+  color: #330006;
 }
 
 a {
-  color: var(--color-primary);
+  color: #ffffff;
   text-underline-offset: 0.2em;
 }
 
@@ -98,8 +93,8 @@ a:hover {
   z-index: 100;
   padding: 0.7rem 1rem;
   border-radius: var(--radius-small);
-  background: var(--color-text);
-  color: var(--color-surface);
+  background: #ffffff;
+  color: #330006;
   transform: translateY(-180%);
 }
 
@@ -143,6 +138,7 @@ a:hover {
 .nav-list a {
   display: inline-block;
   padding-block: 0.35rem;
+  color: var(--color-primary);
   font-weight: 700;
 }
 
@@ -151,212 +147,28 @@ a:hover {
   text-decoration-thickness: 0.2em;
 }
 
-/* Section Hero dengan Latar Gambar Roti & Overlay Gradasi */
-.hero {
-  padding-block: clamp(4rem, 12vw, 8rem);
-  background: 
-    linear-gradient(180deg, rgba(0, 0, 0, 0.65) 0%, rgba(85, 11, 20, 0.85) 100%),
-    url('roti.jpg') center/cover no-repeat;
-  color: #ffffff;
-}
-
-.hero h1,
-.hero .eyebrow,
-.hero .lead {
-  color: #ffffff;
-}
-
-.hero-layout {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
-}
-
-.eyebrow {
-  margin-block-end: 0.5rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.lead {
-  max-width: 62ch;
-  font-size: 1.1rem;
-}
-
-.hero-panel {
-  padding: 1.5rem;
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius-large);
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.3);
-}
-
-.hero-panel strong {
-  display: block;
-  color: var(--color-primary);
-  font-size: 2rem;
-}
-
-.button-group,
-.form-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.button {
-  display: inline-block;
-  padding: 0.75rem 1rem;
-  border: 0.125rem solid var(--color-primary);
-  border-radius: var(--radius-small);
-  background: var(--color-primary);
-  color: #ffffff;
-  font: inherit;
-  font-weight: 700;
-  line-height: 1.2;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.button:hover {
-  background: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-  color: #ffffff;
-}
-
-.button-secondary {
-  background: transparent;
-  color: #ffffff;
-  border-color: #ffffff;
-}
-
-.button-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-.section {
-  padding-block: clamp(2.5rem, 7vw, 5rem);
-}
-
-.section-alt {
-  background: var(--color-background);
-}
-
-.section-intro {
-  max-width: 65ch;
-  color: #ffffff;
-}
-
-.steps-grid,
-.benefit-grid,
-.offer-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
-
-.card {
-  padding: 1.25rem;
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius-medium);
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: var(--shadow-card);
-}
-
-/* Lingkaran Angka Langkah (Solid, Tidak Terpengaruh Gradasi) */
-.step-number {
-  display: inline-grid;
-  width: 2.25rem;
-  height: 2.25rem;
-  margin-block-end: 0.75rem;
-  place-items: center;
-  border-radius: 50%;
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-
-.offer-card {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius-medium);
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: var(--shadow-card);
-}
-
-/* Visual Kartu Penawaran: Gradasi Murni Hitam & Merah */
-.offer-card__visual {
-  min-height: 8rem;
-  background: linear-gradient(135deg, #000000 0%, #800000 100%);
-}
-
-.offer-card__content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 1.25rem;
-}
-
-.offer-card__meta {
-  color: var(--color-muted);
-}
-
-.offer-card__price {
-  margin-block-start: auto;
-  font-size: 1.15rem;
-}
-
-.badge {
-  display: inline-block;
-  width: fit-content;
-  margin-block-end: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  background: var(--color-primary-soft);
-  color: var(--color-primary);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.notice {
-  padding: 1rem;
-  border-inline-start: 0.3rem solid var(--color-primary);
-  border-radius: var(--radius-small);
-  background: var(--color-surface);
-  color: var(--color-text);
-}
-
+/* Page Heading & Teks Petunjuk Form (Semua Putih) */
 .page-heading {
   padding-block: clamp(2.5rem, 7vw, 5rem) 2rem;
   color: #ffffff;
 }
 
-.page-heading h1 {
-  color: #ffffff;
+.page-heading h1,
+.page-heading .lead,
+.page-heading p,
+.required-note {
+  color: #ffffff !important;
 }
 
-.page-heading .lead {
-  color: #f4e8ea;
-}
-
+/* Format Kartu Form */
 .form-card {
   max-width: 56rem;
   margin-block-end: 3rem;
   padding: clamp(1rem, 4vw, 2rem);
   border: 0.0625rem solid var(--color-border);
   border-radius: var(--radius-large);
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: var(--shadow-card);
+  background: transparent;
+  color: #ffffff;
 }
 
 .form-section {
@@ -368,7 +180,7 @@ a:hover {
 
 .form-section legend {
   padding-inline: 0.4rem;
-  color: var(--color-primary);
+  color: #ffffff;
   font-size: 1.1rem;
   font-weight: 700;
 }
@@ -376,18 +188,27 @@ a:hover {
 label {
   display: inline-block;
   margin-block-end: 0.35rem;
+  color: #ffffff;
   font-weight: 700;
 }
 
-input,
+small {
+  color: #e2d2d4;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="datetime-local"],
 select,
 textarea {
   width: 100%;
   padding: 0.7rem 0.75rem;
-  border: 0.0625rem solid #b8a2a5;
+  border: 0.0625rem solid #ffffff;
   border-radius: var(--radius-small);
   background: #ffffff;
-  color: var(--color-text);
+  color: #330006;
   font: inherit;
 }
 
@@ -398,7 +219,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: var(--color-primary);
+  border-color: var(--color-accent);
 }
 
 input[type="checkbox"],
@@ -406,10 +227,46 @@ input[type="radio"] {
   width: 1.1rem;
   height: 1.1rem;
   margin: 0.2rem 0 0;
-  accent-color: var(--color-primary);
+  accent-color: var(--color-accent);
 }
 
-.required-note {
+/* Tombol */
+.button-group,
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.75rem 1rem;
+  border: 0.125rem solid #ffffff;
+  border-radius: var(--radius-small);
+  background: #ffffff;
+  color: var(--color-primary-dark);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-primary-dark);
+}
+
+.button-secondary {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.button-secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
@@ -441,34 +298,9 @@ input[type="radio"] {
     align-items: center;
   }
 
-  .hero-layout {
-    grid-template-columns: minmax(0, 1.5fr) minmax(15rem, 0.7fr);
-  }
-
-  .steps-grid,
-  .benefit-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .offer-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .footer-layout {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-  }
-}
-
-@media (min-width: 68rem) {
-  .offer-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
   }
 }
