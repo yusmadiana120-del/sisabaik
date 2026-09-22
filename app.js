@@ -35,11 +35,10 @@ async function siapkanKatalog() {
       });
       renderKartu(hasil, wadah, status, keranjang);
     }
-}
 
-  inputCari.addEventListener("input", perbaruiTampilan);
-  pilihKategori.addEventListener("change", perbaruiTampilan);
-  perbaruiTampilan();
+    inputCari.addEventListener("input", perbaruiTampilan);
+    pilihKategori.addEventListener("change", perbaruiTampilan);
+    perbaruiTampilan();
   } catch (error) {
     status.textContent = "Data gagal dimuat. Jalankan proyek melalui server lokal.";
     status.classList.add("error-message");
@@ -70,6 +69,7 @@ function renderKartu(data, wadah, status, keranjang) {
     wadah.append(artikel);
   });
 }
+
 function perbaruiRingkasan(keranjang) {
   const total = keranjang.reduce((jumlah, item) => jumlah + item.hargaPenawaran, 0);
   document.querySelector("#jumlah-item").textContent = keranjang.length;
