@@ -1,192 +1,90 @@
-:root {
-  --color-primary: #550b14;        /* Maroon Utama */
-  --color-primary-dark: #1c010c;   /* Maroon Sangat Gelap */
-  --color-primary-soft: #f4e8e1;   /* Rose Water Lembut untuk Badge/Step */
-  --color-accent: #f2b84b;         /* Aksen Kuning Emas */
-  --color-text: #1c010c;           /* Teks Utama Terdalam */
-  --color-muted: #550b14;          /* Teks Muted/Sekunder */
-  --color-surface: #ffffff;        /* Putih Bersih (Latar Kartu & Header) */
-  --color-background: #550b14;     /* Latar Belakang Maroon #550b14 */
-  --color-border: #e6d3c3;         /* Warna Garis Tepi Lembut */
-  --color-danger: #a52a2a;
-  --shadow-card: 0 0.5rem 1.5rem rgb(28 1 12 / 8%);
-  --radius-small: 0.5rem;
-  --radius-medium: 0.9rem;
-  --radius-large: 1.4rem;
-  --content-width: 72rem;
-}
+import { pool } from "../src/db/pool.js";
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+const emailPembeli = process.argv[2] ?? "siti.pembeli@example.test";
+const penawaranId = Number(process.argv[3] ?? 1);
+const kuantitas = Number(process.argv[4] ?? 1);
 
-html {
-  scroll-behavior: smooth;
-}
+if (!Number.isInteger(penawaranId) || !Number.isInteger(kuantitas) || kuantitas < 1) {
+  console.error("penawaranId dan kuantitas harus berupa bilangan bulat positif.");
+  process.exitCode = 1;
+} else {
+  let client;
+  let transaksiDimulai = false;
 
-body {
-  margin: 0;
-  background: var(--color-background);
-  color: var(--color-text);
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  line-height: 1.6;
-}
+  try {
+    client = await pool.connect();
+    await client.query("BEGIN");
+    transaksiDimulai = true;
 
-h1,
-h2,
-h3,
-p {
-  margin-block-start: 0;
-}
+    const pembeli = await client.query(
+      "SELECT id FROM pengguna WHERE email = $1 AND peran = $2",
+      [emailPembeli, "pembeli"]
+    );
+    if (pembeli.rowCount !== 1) throw new Error("Pembeli tidak ditemukan.");
 
-h1,
-h2,
-h3 {
-  line-height: 1.2;
-}
+    const penawaran = await client.query(
+      `SELECT id, penyedia_id, nama, harga_normal, harga_penawaran,
+              stok, status, berakhir_pada
+       FROM penawaran
+       WHERE id = $1
+       FOR UPDATE`,
+      [penawaranId]
+    );
+    if (penawaran.rowCount !== 1) throw new Error("Penawaran tidak ditemukan.");
 
-h1 {
-  max-width: 18ch;
-  margin-block-end: 1rem;
-  font-size: clamp(2rem, 7vw, 3.75rem);
-  color: var(--color-primary-dark);
-}
+    const item = penawaran.rows[0];
+    if (item.status !== "aktif" || new Date(item.berakhir_pada) <= new Date()) {
+      throw new Error("Penawaran tidak aktif atau sudah kedaluwarsa.");
+    }
+    if (item.stok < kuantitas) throw new Error(`Stok ${item.nama} tidak mencukupi.`);
 
-h2 {
-  margin-block-end: 1rem;
-  font-size: clamp(1.5rem, 4vw, 2.25rem);
-  color: var(--color-primary-dark);
-}
+    const pesanan = await client.query(
+      `INSERT INTO pesanan (pembeli_id, penyedia_id)
+       VALUES ($1, $2)
+       RETURNING id`,
+      [pembeli.rows[0].id, item.penyedia_id]
+    );
+    const pesananId = pesanan.rows[0].id;
 
-h3 {
-  margin-block-end: 0.6rem;
-  font-size: 1.2rem;
-  color: var(--color-primary-dark);
-}
+    await client.query(
+      `INSERT INTO detail_pesanan (
+         pesanan_id, penawaran_id, penyedia_id, kuantitas,
+         harga_normal_satuan, harga_penawaran_satuan
+       ) VALUES ($1, $2, $3, $4, $5, $6)`,
+      [pesananId, item.id, item.penyedia_id, kuantitas, item.harga_normal, item.harga_penawaran]
+    );
 
-a {
-  color: var(--color-primary);
-  text-underline-offset: 0.2em;
-}
+    await client.query(
+      "UPDATE penawaran SET stok = stok - $1 WHERE id = $2",
+      [kuantitas, item.id]
+    );
 
-a:hover {
-  text-decoration-thickness: 0.18em;
-}
+    const diperbarui = await client.query(
+      `UPDATE pesanan AS ps
+       SET total_transaksi = r.total,
+           nilai_stok_terselamatkan = r.nilai_stok
+       FROM (
+         SELECT SUM(subtotal) AS total, SUM(nilai_stok) AS nilai_stok
+         FROM detail_pesanan WHERE pesanan_id = $1
+       ) AS r
+       WHERE ps.id = $1
+       RETURNING ps.*`,
+      [pesananId]
+    );
 
-:focus-visible {
-  outline: 0.2rem solid var(--color-accent);
-  outline-offset: 0.2rem;
-}
-
-.skip-link {
-  position: absolute;
-  inset-block-start: 0.5rem;
-  inset-inline-start: 0.5rem;
-  z-index: 100;
-  padding: 0.7rem 1rem;
-  border-radius: var(--radius-small);
-  background: var(--color-text);
-  color: var(--color-surface);
-  transform: translateY(-180%);
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-.container {
-  width: min(100% - 2rem, var(--content-width));
-  margin-inline: auto;
-}
-
-.site-header {
-  background: var(--color-surface);
-  border-block-end: 0.0625rem solid var(--color-border);
-}
-
-.header-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  padding-block: 1rem;
-}
-
-.brand {
-  margin: 0;
-  color: var(--color-primary-dark);
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.nav-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.nav-list a {
-  display: inline-block;
-  padding-block: 0.35rem;
-  font-weight: 700;
-}
-
-.nav-list a[aria-current="page"] {
-  color: var(--color-primary);
-  text-decoration-thickness: 0.2em;
-}
-
-.hero {
-  padding-block: clamp(4rem, 12vw, 8rem);
-  background:
-    linear-gradient(180deg, rgba(28, 1, 12, 0.5) 0%, rgba(28, 1, 12, 0.7) 100%),
-    url(roti.jpg) center/cover no-repeat;
-  color: #ffffff;
-}
-
-/* Teks di dalam hero agar kontras di atas gambar gelap */
-.hero h1,
-.hero .eyebrow,
-.hero .lead {
-  color: #ffffff;
-}
-
-.hero-layout {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
-}
-
-.eyebrow {
-  margin-block-end: 0.5rem;
-  color: var(--color-primary);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.lead {
-  max-width: 62ch;
-  color: var(--color-muted);
-  font-size: 1.1rem;
-}
-
-.hero-panel {
-  padding: 1.5rem;
-  border: 0.0625rem solid var(--color-border);
-  border-radius: var(--radius-large);
-  background: var(--color-surface);
-  color: var(--color-text);
-  box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.25);
-}
-
-.hero-panel strong {
-  display: block;
-  color: var(--color-primary-dark);
-  font-size: 2rem;
+    await client.query("COMMIT");
+    transaksiDimulai = false;
+    console.log("Pesanan berhasil dibuat:");
+    console.table(diperbarui.rows);
+  } catch (error) {
+    if (client && transaksiDimulai) {
+      await client.query("ROLLBACK").catch((rollbackError) => {
+        console.error("Rollback gagal:", rollbackError.message);
+      });
+    }
+    console.error("Pesanan dibatalkan:", error.message);
+  } finally {
+    if (client) client?.release();
+    await pool.end();
+  }
 }
