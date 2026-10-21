@@ -1,14 +1,15 @@
 :root {
-  --color-primary: #550b14;        /* Maroon Utama */
-  --color-primary-dark: #330006;   /* Maroon Sangat Gelap */
-  --color-primary-soft: #f4e8ea;   /* Latar Lingkaran/Badge Solid */
-  --color-accent: #f2b84b;         /* Aksen Kuning Emas */
-  --color-text-dark: #1c010c;      /* Teks Gelap Dalam Kartu */
-  --color-text-light: #ffffff;     /* Teks Putih Terang */
-  --color-surface: #ffffff;        /* Kartu Putih Bersih */
-  --color-background: #550b14;     /* Latar Belakang Utama Maroon */
-  --color-border: #800000;         /* Garis Tepi Merah Tua */
-  --shadow-card: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.35);
+  --color-primary: #550b14;
+  --color-primary-dark: #330006;
+  --color-primary-soft: #f4e8ea;
+  --color-accent: #f2b84b;
+  --color-text: #1c010c;
+  --color-muted: #52615a;
+  --color-surface: #ffffff;        /* Warna Kartu / Permukaan (Putih Bersih) */
+  --color-background: #550b14;     /* Latar Belakang Utama (#550b14) */
+  --color-border: #e2d2d4;
+  --color-danger: #a52a2a;
+  --shadow-card: 0 0.5rem 1.5rem rgb(0 0 0 / 25%);
   --radius-small: 0.5rem;
   --radius-medium: 0.9rem;
   --radius-large: 1.4rem;
