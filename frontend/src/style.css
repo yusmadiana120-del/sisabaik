@@ -2458,3 +2458,11 @@ hr {
     padding: 20px;
   }
 }
+.developer-name {
+  display: block;
+  margin-top: 3px;
+  color: #16a34a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
