@@ -3,7 +3,7 @@ import { pool } from "../src/db/pool.js";
 const stokMinimum = Number(process.argv[2] ?? 1);
 
 if (!Number.isInteger(stokMinimum) || stokMinimum < 0) {
-  console.error("stokMinimum harus berupa bilangan bulat nonnegative.");
+  console.error("stokMinimum harus berupa bilangan bulat nonnegatif.");
   process.exitCode = 1;
 } else {
   try {

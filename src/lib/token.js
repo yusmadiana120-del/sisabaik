@@ -39,7 +39,7 @@ export function verifikasiToken(token) {
     throw new HttpError(
       401,
       expired ? "TOKEN_EXPIRED" : "TOKEN_INVALID",
-      expired ? "Sesi berakhir. Silakan login lagi." : "Token tidak valid."
+      expired ? "Sesi berakhir. Silakan login lagi." : "Token tidak valid.",
     );
   }
 }

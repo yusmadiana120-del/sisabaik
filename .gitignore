@@ -5,3 +5,5 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+# Folder backup lokal
+/frontend - backup/

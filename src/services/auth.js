@@ -7,7 +7,7 @@ import { HttpError } from "../lib/api.js";
 
 const hashDummy = await bcrypt.hash(
   randomBytes(32).toString("hex"),
-  authConfig.cost
+  authConfig.cost,
 );
 
 export async function registrasi(data) {
@@ -20,7 +20,7 @@ export async function registrasi(data) {
       throw new HttpError(
         409,
         "REGISTRATION_CONFLICT",
-        "Pendaftaran tidak dapat diproses."
+        "Pendaftaran tidak dapat diproses.",
       );
     }
     throw error;
@@ -31,17 +31,15 @@ export async function login(data) {
   const row = await akun.cariEmail(data.email);
   const cocok = await bcrypt.compare(
     data.kataSandi,
-    row?.kata_sandi_hash ?? hashDummy
+    row?.kata_sandi_hash ?? hashDummy,
   );
-
   if (!row || !row.aktif || !row.kata_sandi_hash || !cocok) {
     throw new HttpError(
       401,
       "LOGIN_FAILED",
-      "Email atau kata sandi tidak valid."
+      "Email atau kata sandi tidak valid.",
     );
   }
-
   return {
     accessToken: buatToken(row),
     tokenType: "Bearer",
@@ -60,7 +58,7 @@ export async function registrasiPenyedia(data) {
       throw new HttpError(
         409,
         "REGISTRATION_CONFLICT",
-        "Pendaftaran tidak dapat diproses."
+        "Pendaftaran tidak dapat diproses.",
       );
     }
     throw error;

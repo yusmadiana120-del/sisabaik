@@ -6,7 +6,6 @@ export const penyediaLatihan = {
 export function buatDataLatihan(waktu = Date.now()) {
   const jam = 60 * 60 * 1000;
   const dibuatPada = new Date(waktu).toISOString();
-
   const buat = (
     id,
     penyediaId,
@@ -33,7 +32,6 @@ export function buatDataLatihan(waktu = Date.now()) {
     berakhirPada: new Date(waktu + selisihJam * jam).toISOString(),
     dibuatPada,
   });
-
   return [
     buat(
       1,
@@ -78,11 +76,11 @@ export function buatDataLatihan(waktu = Date.now()) {
       4,
       1,
       "Lapau Uni Rina",
-      "Draft Paket Snack",
+      "Draft Paket Besok",
       "roti",
       20000,
       10000,
-      2,
+      3,
       "paket",
       "draft",
       24,
@@ -93,8 +91,8 @@ export function buatDataLatihan(waktu = Date.now()) {
       "Roti Minang",
       "Roti Stok Habis",
       "roti",
-      22000,
-      0,
+      12000,
+      6000,
       0,
       "paket",
       "habis",
@@ -106,7 +104,7 @@ export function buatDataLatihan(waktu = Date.now()) {
       "Roti Minang",
       "Paket Lewat Waktu",
       "roti",
-      26000,
+      16000,
       8000,
       2,
       "paket",

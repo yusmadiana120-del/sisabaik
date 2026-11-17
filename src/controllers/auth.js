@@ -18,7 +18,7 @@ export async function login(req, res) {
 
 export async function registrasiPenyedia(req, res) {
   const data = await service.registrasiPenyedia(
-    registrasiPenyediaValid(req.body)
+    registrasiPenyediaValid(req.body),
   );
   return res.status(201).json({ success: true, data });
 }

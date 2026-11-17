@@ -5,7 +5,8 @@ const penawaranId = Number(process.argv[3] ?? 1);
 const kuantitas = Number(process.argv[4] ?? 1);
 
 if (!Number.isInteger(penawaranId) || !Number.isInteger(kuantitas) || kuantitas < 1) {
-  console.error("penawaranId dan kuantitas harus berupa bilangan bulat positif.");
+
+console.error("penawaranId dan kuantitas harus berupa bilangan bulat positif.");
   process.exitCode = 1;
 } else {
   let client;
@@ -51,7 +52,8 @@ if (!Number.isInteger(penawaranId) || !Number.isInteger(kuantitas) || kuantitas 
          pesanan_id, penawaran_id, penyedia_id, kuantitas,
          harga_normal_satuan, harga_penawaran_satuan
        ) VALUES ($1, $2, $3, $4, $5, $6)`,
-      [pesananId, item.id, item.penyedia_id, kuantitas, item.harga_normal, item.harga_penawaran]
+      [pesananId, item.id, item.penyedia_id, kuantitas,
+       item.harga_normal, item.harga_penawaran]
     );
 
     await client.query(
@@ -83,8 +85,10 @@ if (!Number.isInteger(penawaranId) || !Number.isInteger(kuantitas) || kuantitas 
       });
     }
     console.error("Pesanan dibatalkan:", error.message);
+
+process.exitCode = 1;
   } finally {
-    if (client) client?.release();
+    client?.release();
     await pool.end();
   }
 }
