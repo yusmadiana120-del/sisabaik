@@ -56,10 +56,12 @@ async function logout() {
         class="brand"
         to="/"
         aria-label="SisaBaik — kembali ke katalog"
-        ><img :src="logo" width="42" height="42" alt="" /><span
+                ><img :src="logo" width="42" height="42" alt="" /><span
           >Sisa<span class="brand-accent">Baik</span
-          ><small>kesempatan kedua, kebaikan baru</small></span
-        ></RouterLink
+          ><small>kesempatan kedua, kebaikan baru</small>
+          <small class="developer-name">Dikembangkan oleh Yusma Diana</small>
+        ></span
+      ></RouterLink
       >
       <button
         ref="pembukaMenu"
